@@ -7,13 +7,13 @@ NemoAI_Translation is a Streamlit WebApp for translating English to Vietnamese.
 **On Windows:**
 - Download the Tesseract installer from the official [Tesseract at UB Mannheim page](https://github.com/UB-Mannheim/tesseract/wiki).
 
-Install the required Python packages:
+**Install the required Python packages**:
 ```sh
 pip install pytesseract
 pip install SpeechRecognition pydub
 pip install streamlit_webrtc 
 ```
-- Make sure to add fine-tuned-mt-en-vi folder
+- Make sure to add **fine-tuned-mt-en-vi folder**
   
 ## Video Demo
 
