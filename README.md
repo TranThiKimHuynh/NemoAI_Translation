@@ -13,6 +13,9 @@ pip install pytesseract
 pip install SpeechRecognition pydub
 pip install streamlit_webrtc 
 ```
+- Make sure to add fine-tuned-mt-en-vi folder
+  
 ## Video Demo
 
 [![Video Demo](https://img.youtube.com/vi/Pej-71lwS-s/0.jpg)](https://youtu.be/Pej-71lwS-s)
+
