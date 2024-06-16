@@ -2,7 +2,7 @@ import numpy as np
 from PIL import Image
 import pytesseract
 import speech_recognition as sr
-from streamlit_webrtc import webrtc_streamer, AudioProcessorBase, WebRtcMode
+from streamlit_webrtc import webrtc_streamer
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
@@ -11,20 +11,15 @@ def convert_image_to_text(image):
     text = pytesseract.image_to_string(image)
     return text
 
-class AudioProcessor(AudioProcessorBase):
-    def __init__(self):
-        self.recognizer = sr.Recognizer()
-        self.audio_data = None
-
-    def recognize_speech(self, audio_data):
-        if audio_data is not None:
-            audio_content = audio_data.read()
-            audio_wav = sr.AudioData(audio_content, sample_rate=16000, sample_width=2)
-            try:
-                text = self.recognizer.recognize_google(audio_wav)
-                return text
-            except sr.UnknownValueError:
-                return "Could not understand audio"
-            except sr.RequestError as e:
-                return f"Could not request results; {e}"
-        return ""
+#Function speecn to text
+def speech_to_text(audio_file):
+    recognizer = sr.Recognizer()
+    with sr.AudioFile(audio_file) as source:
+        audio = recognizer.record(source)
+        try:
+            text = recognizer.recognize_google(audio)
+            return text
+        except sr.UnknownValueError:
+            return "Could not understand audio"
+        except sr.RequestError as e:
+            return f"Error: {str(e)}"

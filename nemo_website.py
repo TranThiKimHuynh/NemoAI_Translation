@@ -1,7 +1,7 @@
 import streamlit as st
 import time
 from PIL import Image
-from lib import convert_image_to_text, AudioProcessor
+from lib import convert_image_to_text, speech_to_text
 from transformers import MarianMTModel, MarianTokenizer
 
 model_path = 'fine-tuned-mt-en-vi'
@@ -106,8 +106,7 @@ elif input_type == "Voice":
         st.write(file_details)
 
         with st.spinner('Processing audio...'):
-            audioProcessor = AudioProcessor()
-            input_text = audioProcessor.recognize_speech(uploaded_file)
+            input_text = speech_to_text(uploaded_file)
 
 # Further processing of input_text if needed
 if input_text:
