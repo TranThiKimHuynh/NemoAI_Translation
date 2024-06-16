@@ -16,15 +16,10 @@ class AudioProcessor(AudioProcessorBase):
         self.recognizer = sr.Recognizer()
         self.audio_data = None
 
-    def recv(self, frame):
-        audio = frame.to_ndarray()
-        self.audio_data = audio
-        return frame
-
-    def recognize_speech(self):
-        if self.audio_data is not None:
-            audio_np = np.int16(self.audio_data * 32767)
-            audio_wav = sr.AudioData(audio_np.tobytes(), frame_rate=16000, sample_width=2)
+    def recognize_speech(self, audio_data):
+        if audio_data is not None:
+            audio_content = audio_data.read()
+            audio_wav = sr.AudioData(audio_content, sample_rate=16000, sample_width=2)
             try:
                 text = self.recognizer.recognize_google(audio_wav)
                 return text
